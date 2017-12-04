@@ -14,10 +14,18 @@ public class SMB : StateMachineBehaviour {
 	{
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis ("Vertical");
+		bool shift = Input.GetKey (KeyCode.LeftShift);
+
 
 		Vector2 input = new Vector2(horizontal, vertical).normalized;
+		if (shift) {
+			animator.SetFloat(m_HashHorizontalPara, 2 * input.x, m_Damping, Time.deltaTime);
+			animator.SetFloat(m_HashVerticalPara, 2 * input.y, m_Damping, Time.deltaTime);
 
-		animator.SetFloat(m_HashHorizontalPara, input.x, m_Damping, Time.deltaTime);
-		animator.SetFloat(m_HashVerticalPara, input.y, m_Damping, Time.deltaTime);
+		} else {
+			animator.SetFloat(m_HashHorizontalPara, input.x, m_Damping, Time.deltaTime);
+			animator.SetFloat(m_HashVerticalPara, input.y, m_Damping, Time.deltaTime);
+		}
+
 	}
 }
